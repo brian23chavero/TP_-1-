@@ -27,7 +27,7 @@
  El trabajo práctico deberá ser entregado en el repositorio de GIT correspondiente al TP1 de la
  materia.
  El mismo consistirá en el proyecto de CodeBlocks con el programa funcionando y comentado,
- respetando las reglas de estilo de la cátedra. La compilación no deberá arrojar mensajes de
+ respetando las reglas de estilo de la cátedra. La compilación no deberá arrojar printfs de
  error ni de warnings.
  El proyecto deberá contar con la biblioteca descripta en la sección número dos, y se deberá
  hacer uso de dichas funciones para resolver la lógica del programa.
@@ -35,32 +35,30 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
 #include "BibliotecaCalcu.h"
-
 int main(void) {
 	setbuf(stdout, NULL);
 	int opcion;
 	int num;
 	int num2;
-	float resultadoSuma;
-	float resultadoDiferencia;
+	int resultadoSuma;
+	int resultadoDiferencia;
 	float resultadoDivision;
-	float resultadoMultiplicacion;
+	int resultadoMultiplicacion;
 	int division;
 	int multiplicacion;
 	int factorial1;
 	int factorial2;
+	num2 = 0;
+	num = 0;
 
-	Mensaje("\n*********     TRABAJO PRACTICO Nº 1 - CALCULADORA     **************\n");
-	Mensaje("\n*********     Chavero Brian 1_E     **************\n");
+	printf(
+			"\n*********     TRABAJO PRACTICO Nº 1 - CALCULADORA     **************\n");
+	printf("\n*********     Chavero Brian 1_E     **************\n");
 	do {
-		Mensaje("\n1. para ingresar el primer operando \n");
-		Mensaje("2. para ingresar el segundo operando \n");
-		Mensaje("3. para calcular las operaciones\n");
-		Mensaje("4. para informar los resultados\n");
-		Mensaje("5. para finalizar\n");
-		Mensaje("Elija una opcion: \n");
-		scanf("%d", &opcion);
+		opcion=Menu(num,num2);
+
 		switch (opcion) {
 		case 1:
 			num = PedirEntero("ingrese primer operando\n");
@@ -79,42 +77,50 @@ int main(void) {
 			multiplicacion = Multiplicacion(num, num2,
 					&resultadoMultiplicacion);
 //			factoriales
-			factorial1 = Factorial((float) num);
-			factorial2 = Factorial((float) num2);
+			factorial1 = Factorial( num);
+			factorial2 = Factorial( num2);
 			break;
 
 		case 4:
 
-			Mostrar("\nel resultado de ", num, " + ", num2, "=", resultadoSuma);
+			printf("\nel resultado de %d + %d = %d", num, num2, resultadoSuma);
 
-			Mostrar("\nel resultado de ", num, " - ", num2, "=",resultadoDiferencia);
+			printf("\nel resultado de %d + %d = %d", num, num2, resultadoDiferencia);
+
 			if (division == 1) {
-				Mostrar("\nel resultado de ", (float) num, " / ", num2, "=",resultadoDivision);
+				printf("\nel resultado de %.0f / %d = %.1f", (float) num, num2,
+						resultadoDivision);
 			} else {
-				Mensaje("\nNo se puede realizar la division por 0 ");
+				printf("\nNo se puede realizar la division por 0 ");
 			}
+
 			if (multiplicacion == 0) {
-				Mostrar("\nEl resultado de ", num, " * ", num2, "=",resultadoMultiplicacion);
+				printf("\nEl resultado de %d * %d es %d",num,num2,resultadoMultiplicacion);
 			} else {
-				Mensaje("\nNo se puede realizar la multiplicacion por negativos");
+				printf(
+						"\nNo se puede realizar la multiplicacion por negativos");
 			}
-			if (factorial1 == -1 || factorial1==0) {
-				Mensaje("\nNo se puede  sacar el factorial de negativos ni de 0");
+
+			if (factorial1 == -1 || factorial1 == 0) {
+				printf("\nNo se puede  sacar el factorial de negativos, de 0 o de numeros mayores a 12");
 			} else {
-				MensajeFactorial("\nel factorial de ", num, " es ", factorial1);
+				printf("\nel factorial de %d es %d",num,factorial1);
 			}
-			if (factorial2 == -1|| factorial1==0) {
-				Mensaje("\nNo se puede  sacar el factorial de negativos ni de 0");
+
+			if (factorial2 == -1 || factorial2 == 0) {
+				printf("\nNo se puede  sacar el factorial de negativos, de 0 o de numeros mayores a 12");
 			} else {
-				MensajeFactorial("\nel factorial de ", num2, " es ",factorial2);
+				printf("\nel factorial de %d es %d",num2,factorial2);
 			}
+
 			break;
 		case 5:
-			Mensaje("\n__________________________________________________ \n");
-			Mensaje("\nGracias por usar la calculadora!!");
-			Mensaje("\n__________________________________________________ \n");
+			printf("\n__________________________________________________ \n");
+			printf("\nGracias por usar la calculadora!!");
+			printf("\n__________________________________________________ \n");
 			break;
 		default:
+			printf("Debe ingresar una opcion entre 1 y 5");
 			break;
 		}
 	} while (opcion != 5);

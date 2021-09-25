@@ -4,6 +4,7 @@
  *  Created on: 19 sep. 2021
  *      Author: sofiaailen2argentina
  */
+#include <stdio.h>
 #include "BibliotecaCalcu.h"
 int PedirEntero(char mensaje[]) {
 	int numeroIngresado;
@@ -35,7 +36,8 @@ int Division(int num1, int num2, float *resultado) {
 	}
 	return flag;
 }
-int Multiplicacion(int num1, int num2, float *resultado) {
+
+int Multiplicacion(int num1, int num2, int *resultado) {
 	int resultadoFinal;
 	int flag;
 	flag = 1;
@@ -46,14 +48,15 @@ int Multiplicacion(int num1, int num2, float *resultado) {
 	}
 	return flag;
 }
-long int Factorial(long int numero) {
+
+int Factorial(int numero) {
 	int factorial;
 
 	factorial = 1;
 	if (numero == 0) {
 		factorial = 0;
 	} else {
-		if (numero < 0) {
+		if (numero < 0 || numero>=13) {
 			factorial = -1;
 		}
 	}
@@ -63,13 +66,27 @@ long int Factorial(long int numero) {
 	}
 	return factorial;
 }
-void MensajeFactorial(char mensaje[],int num2,char mensaje2[],long int num) {
-	printf("%s %d %s %li ", mensaje, num2,mensaje2,num);
-}
-void Mostrar(char mensaje[], int num, char mensaje2[], int num2,
-		char mensaje3[], long int  num3) {
-	printf("%s %d %s %d %s %li", mensaje, num, mensaje2, num2, mensaje3, num3);
-}
-void Mensaje(char mensaje[]) {
-	printf("%s", mensaje);
+
+int Menu(int num1,int num2){
+	int opcion;
+	int flag;
+	int flag2;
+	flag=0;
+	flag2=0;
+	if (flag) {
+				printf("\n1. para ingresar el primer operando \n");
+			} else {
+				printf("\n\n1. el primer operando es A=%d", num1);
+			}
+			if (flag2) {
+				printf("\n2. para ingresar el primer operando \n");
+			} else {
+				printf("\n2. el segundo operando es B=%d", num2);
+			}
+			printf("\n3. para calcular las operaciones\n");
+			printf("4. para informar los resultados\n");
+			printf("5. para finalizar\n");
+			printf("Elija una opcion: \n");
+			scanf("%d", &opcion);
+			return opcion;
 }
